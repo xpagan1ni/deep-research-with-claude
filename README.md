@@ -1,10 +1,10 @@
-# Open Deep Research
+# Open Deep Research with Claude
 
-An AI-powered research assistant that performs iterative, deep research on any topic by combining search engines, web scraping, and large language models.
+An AI-powered research assistant that performs iterative, deep research on any topic by combining search engines, web scraping, and Claude's advanced language model capabilities. This project is a modified version of the original work by [dzhng](https://x.com/dzhng), adapted to work with Claude API.
 
 The goal of this repo is to provide the simplest implementation of a deep research agent - e.g. an agent that can refine its research direction over time and deep dive into a topic. Goal is to keep the repo size at <500 LoC so it is easy to understand and build on top of.
 
-If you like this project, please consider starring it and giving me a follow on [X/Twitter](https://x.com/dzhng). This project is sponsored by [Aomni](https://aomni.com).
+If you like this project, please consider starring it. The original project was sponsored by [Aomni](https://aomni.com).
 
 ## How It Works
 
@@ -67,8 +67,9 @@ flowchart TB
 
 ## Features
 
+- **Claude-Powered Analysis**: Leverages Anthropic's Claude API for advanced language understanding and research capabilities
 - **Iterative Research**: Performs deep research by iteratively generating search queries, processing results, and diving deeper based on findings
-- **Intelligent Query Generation**: Uses LLMs to generate targeted search queries based on research goals and previous findings
+- **Intelligent Query Generation**: Uses Claude to generate targeted search queries based on research goals and previous findings
 - **Depth & Breadth Control**: Configurable parameters to control how wide (breadth) and deep (depth) the research goes
 - **Smart Follow-up**: Generates follow-up questions to better understand research needs
 - **Comprehensive Reports**: Produces detailed markdown reports with findings and sources
@@ -79,7 +80,7 @@ flowchart TB
 - Node.js environment
 - API keys for:
   - Firecrawl API (for web search and content extraction)
-  - OpenAI API (for o3 mini model)
+  - Claude API (for advanced language processing)
 
 ## Setup
 
@@ -99,20 +100,14 @@ FIRECRAWL_KEY="your_firecrawl_key"
 # If you want to use your self-hosted Firecrawl, add the following below:
 # FIRECRAWL_BASE_URL="http://localhost:3002"
 
-OPENAI_KEY="your_openai_key"
+CLAUDE_API_KEY="your_claude_key"
 ```
-
-To use local LLM, comment out `OPENAI_KEY` and instead uncomment `OPENAI_ENDPOINT` and `OPENAI_MODEL`:
-- Set `OPENAI_ENDPOINT` to the address of your local server (eg."http://localhost:1234/v1")
-- Set `OPENAI_MODEL` to the name of the model loaded in your local server.
 
 ### Docker
 
 1. Clone the repository
 2. Rename `.env.example` to `.env.local` and set your API keys
-
 3. Run `npm install`
-
 4. Run the Docker image:
 
 ```bash
@@ -142,7 +137,7 @@ You'll be prompted to:
 The system will then:
 
 1. Generate and execute search queries
-2. Process and analyze search results
+2. Process and analyze search results using Claude
 3. Recursively explore deeper based on findings
 4. Generate a comprehensive markdown report
 
@@ -154,30 +149,18 @@ If you have a paid version of Firecrawl or a local version, feel free to increas
 
 If you have a free version, you may sometimes run into rate limit errors, you can reduce the limit (but it will run a lot slower).
 
-### Custom endpoints and models
-
-There are 2 other optional env vars that lets you tweak the endpoint (for other OpenAI compatible APIs like OpenRouter or Gemini) as well as the model string.
-
-```bash
-OPENAI_ENDPOINT="custom_endpoint"
-OPENAI_MODEL="custom_model"
-```
-
 ## How It Works
 
 1. **Initial Setup**
-
    - Takes user query and research parameters (breadth & depth)
-   - Generates follow-up questions to understand research needs better
+   - Uses Claude to generate follow-up questions for better understanding
 
 2. **Deep Research Process**
-
    - Generates multiple SERP queries based on research goals
-   - Processes search results to extract key learnings
+   - Processes search results with Claude to extract key learnings
    - Generates follow-up research directions
 
 3. **Recursive Exploration**
-
    - If depth > 0, takes new research directions and continues exploration
    - Each iteration builds on previous learnings
    - Maintains context of research goals and findings
