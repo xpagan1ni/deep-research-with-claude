@@ -4,8 +4,6 @@ An AI-powered research assistant that performs iterative, deep research on any t
 
 The goal of this repo is to provide the simplest implementation of a deep research agent - e.g. an agent that can refine its research direction over time and deep dive into a topic. Goal is to keep the repo size at <500 LoC so it is easy to understand and build on top of.
 
-If you like this project, please consider starring it. The original project was sponsored by [Aomni](https://aomni.com).
-
 ## How It Works
 
 ```mermaid
